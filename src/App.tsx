@@ -9,6 +9,11 @@ import Register from './views/Register/Register';
 import { getLoggedUser } from './services/users-service';
 import { useState } from 'react';
 import AppState from './providers/app-state';
+import Landing from './views/Landing/Landing';
+import Authenticated from './HOC/Authenticated';
+import Dashboard from './views/Dashboard/Dashboard';
+import Whiteboard from './views/Whiteboard/Whiteboard';
+import Profile from './views/Profile/Profile';
 // import AppState from './providers/app-state';
 
 const userHandle = getLoggedUser(); 
@@ -35,9 +40,18 @@ function App() {
         <AppState.Provider value={{ context, setContext }}>
           <Navbar/> 
           <Routes>
-            <Route index/>
+            <Route index element={<Landing/>}/>
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
+            <Route path='/*' element={
+              <Authenticated>
+                <Routes>
+                  <Route path='dashboard' element={<Dashboard/>}/>
+                  <Route path='whiteboard' element={<Whiteboard/>}/>
+                  <Route path='profile' element={<Profile/>}/>
+                </Routes>
+              </Authenticated>
+            }></Route>
           </Routes>
         </AppState.Provider>
       </BrowserRouter>

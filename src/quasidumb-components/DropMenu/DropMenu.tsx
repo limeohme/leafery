@@ -50,12 +50,12 @@ function DropMenu () {
         sx={{ maxHeight: 1,
           width: 1, top: 0, left: 0 }}
       > <MenuList  sx={{ width: '8rem' }}>
-          <MenuItem component={Link} to='home'>Home</MenuItem>
-          <MenuItem component={Link} to='private/dashboard'>Dashboard</MenuItem>
-          <MenuItem component={Link} to='private/whiteboard'>Whiteboard</MenuItem>
-          <MenuItem component={Link} to='walkthrough'>Walkthrough</MenuItem>
-          <MenuItem component={Link} to='private/profile'>Profile</MenuItem>
-          <MenuItem component={Link} to='login'>Login</MenuItem>
+          <MenuItem component={Link} to='/'>Home</MenuItem>
+          <MenuItem component={Link} to='/dashboard'>Dashboard</MenuItem>
+          <MenuItem component={Link} to='/whiteboard'>Whiteboard</MenuItem>
+          <MenuItem component={Link} to='/walkthrough'>Walkthrough</MenuItem>
+          <MenuItem component={Link} to='/profile'>Profile</MenuItem>
+          <MenuItem component={Link} to='/login'>Login</MenuItem>
           {/* <MenuItem><SignOut/></MenuItem> */}
         </MenuList>
       </Menu>
