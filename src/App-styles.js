@@ -1,12 +1,12 @@
 
 export const appStyle =  {
-  'background-color': '#fff',
-  'min-height': '100vh',
+  'bgcolor': '#fff',
+  'minHeight': '100vh',
   'display': 'flex',
-  'flex-direction': 'column',
-  'align-items': 'center',
+  'flexDirection': 'column',
+  'alignItems': 'center',
   /* justify-content: center, */
-  'font-size': '16px',
+  'fontSize': '16px',
   color: 'white',
 };
 
