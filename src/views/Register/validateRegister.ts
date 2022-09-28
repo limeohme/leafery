@@ -19,12 +19,21 @@ export async function validations (data: form) {
   if (!data.name) {
     throw new Error('Please enter a username!');
   }
+  if (
+    data.name.includes('.') || data.name.includes('#') || data.name.includes('$')
+    || data.name.includes('[') || data.name.includes(']')
+  ) {
+    throw new Error('Username cannot include: ".", "#", "$", "[", or "]"');
+  }
   const snap = await getUserByHandle(data.name);
   if (snap.exists()) {
     throw new Error('Username is already taken!');
   }
   if (!data.pass || ! data.passCheck) {
-    throw new Error('Plase enter and confirm your password!');
+    throw new Error('Please enter and confirm your password!');
+  }
+  if (data.pass.length < 6) {
+    throw new Error('Password must be at least 6 characters long!');
   }
   if (data.pass !== data.passCheck) {
     throw new Error('Passwords don\'t match!');

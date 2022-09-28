@@ -1,20 +1,31 @@
 import { KeyboardDoubleArrowDown } from '@mui/icons-material';
 import { Box, Button, Menu, MenuItem, MenuList } from '@mui/material';
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import AppState from '../../../providers/app-state';
-// import SignOut from '../SignOut/SignOut';
+import AppState from '../../providers/app-state';
+import { signOutUser } from '../../services/auth-service';
+import { removeUserFromStorage } from '../../services/users-service';
 
 
 function DropMenu () {
   const [anchor, setAnchor] = useState(null);
-  //   const { appState: { user } } = useContext(AppState);
+  const { context: { user, theme }, setContext } = useContext(AppState);
   const open = Boolean(anchor);
   const handleClick = (event: any) => {
     setAnchor(event.currentTarget);
   };
   const handleClose = () => {
     setAnchor(null);
+  };
+
+  const handleLogout = async () => {
+    try {
+      await signOutUser();
+      removeUserFromStorage();
+      setContext({ theme, user: '' });
+    } catch (err) {
+      console.error(err);
+    }
   };
   return (
     <Box sx={{ alignSelf: 'end' }}>
@@ -50,13 +61,14 @@ function DropMenu () {
         sx={{ maxHeight: 1,
           width: 1, top: 0, left: 0 }}
       > <MenuList  sx={{ width: '8rem' }}>
-          <MenuItem component={Link} to='/'>Home</MenuItem>
-          <MenuItem component={Link} to='/dashboard'>Dashboard</MenuItem>
-          <MenuItem component={Link} to='/whiteboard'>Whiteboard</MenuItem>
+          {user? <><MenuItem component={Link} to='/dashboard'>Dashboard</MenuItem>
+            <MenuItem component={Link} to='/whiteboard'>Whiteboard</MenuItem>
+            <MenuItem component={Link} to='/profile'>Profile</MenuItem></> : null
+          }
           <MenuItem component={Link} to='/walkthrough'>Walkthrough</MenuItem>
-          <MenuItem component={Link} to='/profile'>Profile</MenuItem>
-          <MenuItem component={Link} to='/login'>Login</MenuItem>
-          {/* <MenuItem><SignOut/></MenuItem> */}
+          <MenuItem component={Link} to='/'>Home</MenuItem>
+          {user?<MenuItem component={Link} to='/' onClick={handleLogout}>Logout</MenuItem>
+            : <MenuItem component={Link} to='/login'>Login</MenuItem>}
         </MenuList>
       </Menu>
     </Box>

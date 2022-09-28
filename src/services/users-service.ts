@@ -18,8 +18,6 @@ export function updateUserInfo(newInfo: string) {
 
 export function removeUserFromStorage() {
   localStorage.removeItem('userInfo');
-  localStorage.removeItem('userAuth');
-
 }
 
   
