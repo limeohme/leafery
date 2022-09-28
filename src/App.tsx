@@ -1,10 +1,10 @@
 // import React, { useState } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-import './App.css';
+import './App-styles.js';
 import Navbar from './quasidumb-components/Navbar/Navbar';
 import Login from './views/Login/Login';
-import { useTheme } from '@mui/material';
-import { lightTheme } from './common/theme-colours';
+import { Box, useTheme } from '@mui/material';
+import { darkTheme, lightTheme } from './common/theme-colours';
 import Register from './views/Register/Register';
 import { getLoggedUser } from './services/users-service';
 import { useState } from 'react';
@@ -14,6 +14,7 @@ import Authenticated from './HOC/Authenticated';
 import Dashboard from './views/Dashboard/Dashboard';
 import Whiteboard from './views/Whiteboard/Whiteboard';
 import Profile from './views/Profile/Profile';
+import { appStyle } from './App-styles.js';
 // import AppState from './providers/app-state';
 
 const userHandle = getLoggedUser(); 
@@ -35,7 +36,10 @@ function App() {
 
   
   return (
-    <div className="App">
+    <Box sx={{ ...appStyle,
+      bgcolor: context.theme === 'dark' ? darkTheme.bgcolour : lightTheme.bgcolour,
+      color: context.theme === 'dark' ? darkTheme.txcolour : lightTheme.txcolour
+    }}>
       <BrowserRouter>
         <AppState.Provider value={{ context, setContext }}>
           <Navbar/> 
@@ -55,7 +59,7 @@ function App() {
           </Routes>
         </AppState.Provider>
       </BrowserRouter>
-    </div>
+    </Box>
   );
 }
 
