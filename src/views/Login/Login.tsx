@@ -1,8 +1,9 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { lightTheme } from '../../common/theme-colours';
 import AppState from '../../providers/app-state';
+import Error from '../../reusable-parts-components/Errors/Error';
 import { signInUser } from '../../services/auth-service';
 import { getUserByHandle, updateUserInfo } from '../../services/users-service';
 import { validateLogForm } from './login-validations';
@@ -39,7 +40,7 @@ export default function Login () {
   };
   return (
     <Box sx={{ m: '10vw', display: 'flex', flexDirection: 'column', bgcolor: '#b2da81', borderRadius: 2, border: '8px solid #528a47', p: 1 }}>
-      <Typography variant='body1'>{message}</Typography>
+      <Error message={message}/>
       <TextField sx={textInputStyles} placeholder={'username'} onChange={(e) => setFormData({ ...formData, username: e.target.value })}/>
       <TextField sx={textInputStyles} type='password' placeholder={'password'} onChange={(e) => setFormData({ ...formData, password: e.target.value })}/>
       <Button  sx={{ color: lightTheme.txcolour, bgcolor: lightTheme.accent, width: 'fit-content', alignSelf: 'center' }}
