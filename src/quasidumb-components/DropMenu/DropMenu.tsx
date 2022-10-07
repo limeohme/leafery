@@ -2,6 +2,7 @@ import { KeyboardDoubleArrowDown } from '@mui/icons-material';
 import { Box, Button, Menu, MenuItem, MenuList } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { darkTheme } from '../../common/theme-colours';
 import AppState from '../../providers/app-state';
 import { signOutUser } from '../../services/auth-service';
 import { removeUserFromStorage } from '../../services/users-service';
@@ -28,7 +29,7 @@ function DropMenu () {
     }
   };
   return (
-    <Box sx={{ alignSelf: 'end' }}>
+    <Box sx={{ alignSelf: 'center' }}>
       <Button
         id="drop-menu-button"
         aria-controls={open ? 'drop-menu' : undefined}
@@ -39,7 +40,8 @@ function DropMenu () {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardDoubleArrowDown />}
-      >{''}</Button>
+        sx={{ color: darkTheme.accent2 }}
+      >{'😊'}</Button>
       
       <Menu
         
@@ -59,7 +61,7 @@ function DropMenu () {
         open={open}
         onClick={handleClose}
         sx={{ maxHeight: 1,
-          width: 1, top: 0, left: 0 }}
+          width: 1, top: 0, left: 0, }}
       > <MenuList  sx={{ width: '8rem' }}>
           {user? <MenuList><MenuItem component={Link} to='/dashboard'>Dashboard</MenuItem>
             <MenuItem component={Link} to='/whiteboard'>Whiteboard</MenuItem>

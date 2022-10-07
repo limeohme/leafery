@@ -1,8 +1,9 @@
 export const navbarStyle = {
   width: '80vw',
   bgcolor: '#B2DA81',
-  justifySelf: 'start',
-  borderRadius: '8px'
+  borderRadius: '8px',
+  boxSizing: 'border-box',
+  p: 1.5,
 };
 
 export const navButtonStyle = {
