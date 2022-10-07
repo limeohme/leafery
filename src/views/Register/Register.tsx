@@ -1,8 +1,9 @@
-import { Box, Button, TextField, Typography } from '@mui/material';
+import { Box, Button, TextField } from '@mui/material';
 import { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { lightTheme } from '../../common/theme-colours';
 import AppState from '../../providers/app-state';
+import Error from '../../reusable-parts-components/Errors/Error';
 import { registerUser } from '../../services/auth-service';
 import { createUserHandle, updateUserInfo } from '../../services/users-service';
 import { defaultUserData } from './userData';
@@ -50,8 +51,8 @@ export default function Register () {
 
   return (
     <Box sx={{ m: '10vw', display: 'flex', flexDirection: 'column', 
-      bgcolor: '#b2da81', borderRadius: 2, border: '8px solid #528a47', p: 1 }}>
-      <Typography variant='body1'>{errMsg}</Typography>
+      bgcolor: '#b2da81', borderRadius: 2, border: '8px solid #528a47', p: 1, justifyContent: 'center' }}>
+      <Error message={errMsg}></Error>
       <TextField type='text' placeholder={'username'} sx={textInputStyles}
         onChange={(e) => {
           setFormData({ ...formData, name: e.target.value });
