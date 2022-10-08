@@ -15,6 +15,7 @@ import Dashboard from './views/Dashboard/Dashboard';
 import Whiteboard from './views/Whiteboard/Whiteboard';
 import Profile from './views/Profile/Profile';
 import { appStyle } from './App-styles.js';
+import CreateLeaf from './views/CreateLeaf/CreateLeaf';
 // import AppState from './providers/app-state';
 
 const userHandle = getLoggedUser(); 
@@ -51,6 +52,7 @@ function App() {
               <Authenticated>
                 <Routes>
                   <Route path='dashboard' element={<Dashboard/>}/>
+                  <Route path='create-leaf' element={<CreateLeaf/>}/>
                   <Route path='whiteboard' element={<Whiteboard/>}/>
                   <Route path='profile' element={<Profile/>}/>
                 </Routes>
