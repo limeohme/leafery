@@ -6,6 +6,7 @@ export const appStyle =  {
   'flexDirection': 'column',
   'alignItems': 'center',
   /* justify-content: center, */
+  fontFamily: 'Noto Sans KR',
   'fontSize': '16px',
   color: 'white',
 };

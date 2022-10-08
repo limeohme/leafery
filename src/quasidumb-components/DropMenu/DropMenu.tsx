@@ -2,7 +2,7 @@ import { KeyboardDoubleArrowDown } from '@mui/icons-material';
 import { Box, Button, Menu, MenuItem, MenuList } from '@mui/material';
 import React, { useContext, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { darkTheme } from '../../common/theme-colours';
+import { darkTheme, txtTheme } from '../../common/theme-colours';
 import AppState from '../../providers/app-state';
 import { signOutUser } from '../../services/auth-service';
 import { removeUserFromStorage } from '../../services/users-service';
@@ -29,7 +29,7 @@ function DropMenu () {
     }
   };
   return (
-    <Box sx={{ alignSelf: 'center' }}>
+    <Box sx={{ alignSelf: 'center', fontFamily: txtTheme.font }}>
       <Button
         id="drop-menu-button"
         aria-controls={open ? 'drop-menu' : undefined}
@@ -40,8 +40,8 @@ function DropMenu () {
         disableElevation
         onClick={handleClick}
         endIcon={<KeyboardDoubleArrowDown />}
-        sx={{ color: darkTheme.accent2 }}
-      >{'😊'}</Button>
+        sx={{ color: darkTheme.bgcolour }}
+      ></Button>
       
       <Menu
         
@@ -63,14 +63,14 @@ function DropMenu () {
         sx={{ maxHeight: 1,
           width: 1, top: 0, left: 0, }}
       > <MenuList  sx={{ width: '8rem' }}>
-          {user? <MenuList><MenuItem component={Link} to='/dashboard'>Dashboard</MenuItem>
-            <MenuItem component={Link} to='/whiteboard'>Whiteboard</MenuItem>
-            <MenuItem component={Link} to='/profile'>Profile</MenuItem></MenuList> : null
+          {user? <MenuList sx={{ width: '8rem' }}><MenuItem component={Link} to='/dashboard'>Dashboard</MenuItem>
+            <MenuItem sx={{ fontFamily: txtTheme.font }} component={Link} to='/whiteboard'>Whiteboard</MenuItem>
+            <MenuItem sx={{ fontFamily: txtTheme.font }} component={Link} to='/profile'>Profile</MenuItem></MenuList> : null
           }
-          <MenuItem component={Link} to='/walkthrough'>Walkthrough</MenuItem>
-          <MenuItem component={Link} to='/'>Home</MenuItem>
-          {user?<MenuItem component={Link} to='/' onClick={handleLogout}>Logout</MenuItem>
-            : <MenuItem component={Link} to='/login'>Login</MenuItem>}
+          <MenuItem sx={{ fontFamily: txtTheme.font }} component={Link} to='/walkthrough'>Walkthrough</MenuItem>
+          <MenuItem sx={{ fontFamily: txtTheme.font }} component={Link} to='/'>Home</MenuItem>
+          {user?<MenuItem sx={{ fontFamily: txtTheme.font }} component={Link} to='/' onClick={handleLogout}>Logout</MenuItem>
+            : <MenuItem sx={{ fontFamily: txtTheme.font }} component={Link} to='/login'>Login</MenuItem>}
         </MenuList>
       </Menu>
     </Box>
