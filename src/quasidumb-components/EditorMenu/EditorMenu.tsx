@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Foldable from '../../HOC/Foldable';
 import './editor-menu-styles.scss';
 
-export default function EditorMenu ({ editor }: any) {
+export default function EditorMenu ({ editor, addImage }: any) {
 
   const [triggers, setTriggers] = useState({
     style: false,
@@ -14,6 +14,8 @@ export default function EditorMenu ({ editor }: any) {
   if (!editor) {
     return null;
   }
+
+  
     
   return (
     <Box sx={{ boxSizing: 'border-box', m: 1, width: '50vw' }}>
@@ -202,6 +204,7 @@ export default function EditorMenu ({ editor }: any) {
         </Button>
 
       </div>
+      <Button onClick={addImage}>set image</Button>
     </Box>
   );
 };

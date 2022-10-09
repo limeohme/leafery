@@ -6,22 +6,24 @@
 #root > div > div.container.MuiBox-root.css-0 > div {
     width: 60vw;
     min-width: 300px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 #root > div > div.container.MuiBox-root.css-0 {
     width: 60vw;
     min-width: 300px;
 }
-
+#root > div > div.MuiBox-root.css-tit80c > div:nth-child(5) {
+  margin: 0px;
+}
 .ProseMirror {
     padding: 20px;
     margin-top: 2vh;
-    width: 100%;
+    width: 60vw;
     min-width: 280px;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 10px;
+    margin-right: 10px;
     border: 2px solid #ff9248;
     border-radius: 5px;
     box-sizing: border-box;
