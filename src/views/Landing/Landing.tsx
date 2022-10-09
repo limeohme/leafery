@@ -10,7 +10,7 @@ export default function Landing () {
   return (
     <Grid container direction={'row'} gap={3} sx={{ width: '80%', minWidth: '320px', padding: '5vh', justifyContent: 'space-between' }}>
       <Grid item container direction={'column'} lg={4.5} sm={12} sx={{ justifyContent: 'space-between', }}>
-        <Grid item><Title></Title></Grid>
+        <Grid item><Title text='Leafery 🌿'></Title></Grid>
         <Grid item 
           sx={{
             bgcolor: theme === 'dark'? '#fff': darkTheme.bgcolour, 

@@ -22,5 +22,6 @@ export const darkTheme: Theme = {
 };
 
 export const txtTheme = {
-  font: 'Noto Sans KR'
+  font: 'Noto Sans KR',
+  titleFont: 'Amatic SC'
 };

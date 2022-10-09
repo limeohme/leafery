@@ -1,4 +1,7 @@
 import './Title.css';
-export default function Title () {
-  return <h1 id='page-title'>Leafery 🌿</h1>;
+interface TitleProps {
+  text: string;
+}
+export default function Title ({ text }: TitleProps) {
+  return <h1 id='page-title'>{text}</h1>;
 }
