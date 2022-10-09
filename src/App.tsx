@@ -18,7 +18,7 @@ import { appStyle } from './App-styles.js';
 import CreateLeaf from './views/CreateLeaf/CreateLeaf';
 // import AppState from './providers/app-state';
 
-const userHandle = getLoggedUser(); 
+const userHandle = JSON.parse(getLoggedUser()); 
 // const snap = await getUserByHandle(userHandle);
 // const user = snap.val();
 
