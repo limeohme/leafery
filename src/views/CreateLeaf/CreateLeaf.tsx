@@ -9,6 +9,8 @@ import { useCallback, useContext, useState } from 'react';
 import AppState from '../../providers/app-state';
 import Image from '@tiptap/extension-image';
 import { createLeaf } from '../../services/leaf-service';
+import Error from '../../reusable-parts-components/Errors/Error';
+import { cleanPathForDB, messageSetter } from '../../common/helpers';
 // import { useState } from 'react';
 // import { lightTheme } from '../../common/theme-colours';
 
@@ -24,10 +26,12 @@ interface ILeaf {
   public: boolean;
   createdOn: string;
   editedOn: string;
+  images: boolean;
 }
 
 export default function CreateLeaf () {
   const { context: { user } } = useContext(AppState);
+  const [message, setMessage] = useState('');
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -51,6 +55,7 @@ export default function CreateLeaf () {
     public: false,
     createdOn: new Date().toLocaleDateString().split('/').join('-'),
     editedOn: '',
+    images: false
   });
 
   const addImage = useCallback(() => {
@@ -58,6 +63,7 @@ export default function CreateLeaf () {
 
     if (url) {
       editor?.chain().focus().setImage({ src: url }).run();
+      setNewLeaf({ ...newLeaf, images: true });
     }
   }, [editor]);
 
@@ -65,8 +71,20 @@ export default function CreateLeaf () {
     return null;
   }
 
+  const handleLeafSave = async (leaf: ILeaf) => {
+    try {
+      if (editor.isEmpty) {
+        // eslint-disable-next-line no-throw-literal
+        throw { message: 'Hey, your leaf is missing its content.' };
+      }
+      messageSetter(await createLeaf(leaf), setMessage);
+    } catch (err: any) {
+      console.error(err.message);
+      messageSetter(err.message, setMessage);
+    }
+  };
+
   // const [isPublic, setIsPublic] = useState(false);
-  console.log(editor?.getJSON());
   return (
     <Box sx={{ my: '5vh', flexWrap: 'wrap' }}>
       <Grid container direction='row' justifyContent={'space-between'}>
@@ -81,12 +99,11 @@ export default function CreateLeaf () {
       {/* <FormControlLabel 
         control={<Checkbox sx={{ color: lightTheme.accent }} checked={isPublic} onChange={() => setIsPublic(!isPublic)}/>}
         label="Post to public leafery" /> */}
-      <Button onClick={() => {                                
-        if (newLeaf.leaf && newLeaf.id) createLeaf(newLeaf);
-      }}>Save</Button>
+      <Button onClick={() => handleLeafSave(newLeaf)}>Save</Button>
+      <Error message={message}></Error>
       <EditorContent editor={editor} onKeyUp={() => {
-        const text = JSON.parse(JSON.stringify(editor?.getJSON() || [])).content[0].content[0].text.slice(0, 15);
-        setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), preview: text, id: `${newLeaf.author}-${newLeaf.createdOn}-${text}` });
+        const text = editor?.getText().slice(0, 25);
+        setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), preview: text, id: `${newLeaf.author}-${newLeaf.createdOn}-${cleanPathForDB(text)}` });
       }} />
     </Box>
   );

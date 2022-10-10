@@ -13,8 +13,15 @@ interface ILeaf {
     public: boolean;
     createdOn: string;
     editedOn: string;
+    images: boolean;
 }
 
-export const createLeaf = (leaf: ILeaf) => {
-  set(ref(db, `leaves/${leaf.author}/${leaf.id}`), leaf);
+export const createLeaf = async (leaf: ILeaf) => {
+  try {
+    await set(ref(db, `leaves/${leaf.author}/${leaf.id}`), leaf);
+    return 'Success!';
+  } catch (err) {
+    console.error(err);
+    return 'Something went wrong. Please, try again.';
+  }
 };
