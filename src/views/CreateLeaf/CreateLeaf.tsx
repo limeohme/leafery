@@ -40,7 +40,7 @@ export default function CreateLeaf () {
         types: ['heading', 'paragraph', 'bulletList', 'orderedList'],
       }),
     ],
-    content: '',
+    content: null,
   });
 
   const [newLeaf, setNewLeaf] = useState<ILeaf>({
@@ -63,7 +63,7 @@ export default function CreateLeaf () {
 
     if (url) {
       editor?.chain().focus().setImage({ src: url }).run();
-      setNewLeaf({ ...newLeaf, images: true });
+      setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), images: true });
     }
   }, [editor]);
 
@@ -83,6 +83,7 @@ export default function CreateLeaf () {
       messageSetter(err.message, setMessage);
     }
   };
+  console.log(editor.getHTML());
 
   // const [isPublic, setIsPublic] = useState(false);
   return (
