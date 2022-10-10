@@ -4,6 +4,7 @@ export const navbarStyle = {
   borderRadius: '8px',
   boxSizing: 'border-box',
   p: 1.5,
+  alignItems: 'center'
 };
 
 export const navButtonStyle = {

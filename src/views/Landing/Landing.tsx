@@ -9,7 +9,7 @@ export default function Landing () {
   
   return (
     <Grid container direction={'row'}  sx={{ width: '80%', minWidth: '320px', padding: '5vh', justifyContent: 'space-between' }}>
-      <Grid item container direction={'column'} lg={6} sm={12} sx={{ justifyContent: 'space-between', }}>
+      <Grid item container direction={'column'} lg={6} sm={12} sx={{ justifyContent: 'space-around' }}>
         <Grid item sx={{ display: 'flex', justifyContent: 'center' }}><Title text='Leafery'></Title></Grid>
         <Grid item 
           sx={{
