@@ -8,8 +8,8 @@ export default function Landing () {
   const { context: { theme } } = useContext(AppState);
   
   return (
-    <Grid container direction={'row'} gap={3} sx={{ width: '80%', minWidth: '320px', padding: '5vh', justifyContent: 'space-between' }}>
-      <Grid item container direction={'column'} lg={4.5} sm={12} sx={{ justifyContent: 'space-between', }}>
+    <Grid container direction={'row'}  sx={{ width: '80%', minWidth: '320px', padding: '5vh', justifyContent: 'space-between' }}>
+      <Grid item container direction={'column'} lg={6} sm={12} sx={{ justifyContent: 'space-between', }}>
         <Grid item><Title text='Leafery 🌿'></Title></Grid>
         <Grid item 
           sx={{
@@ -27,12 +27,12 @@ export default function Landing () {
           </Typography>
         </Grid>
       </Grid>
-      <Grid item lg={7} sm={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+      <Grid item lg={6} sm={12} sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <Card sx={{ backgroundColor: 'transparent', p: 2, }} elevation={0}>
           <CardMedia
             component="img"
             height={'700vh'}
-            image={require('../../images/catonwindowmemeAPPS.png')}
+            image={require('../../images/Leafy.png')}
             alt="penguin"
             sx={{ objectFit: 'scale-down' }}
           />
