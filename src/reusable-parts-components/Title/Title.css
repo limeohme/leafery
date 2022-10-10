@@ -2,12 +2,12 @@
 
 #page-title {
     font-family: 'Amatic SC', cursive;
-    font-size: 90pt;
+    font-size: 120pt;
 }
 
 @media only screen and (max-width: 600px) {
     #page-title {
         font-family: 'Amatic SC', cursive;
-        font-size: 48pt;
+        font-size: 68pt;
     }
 }
