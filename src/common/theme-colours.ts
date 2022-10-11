@@ -8,13 +8,13 @@ type Theme = {
 
 export const lightTheme: Theme = {
   bgcolour: '#b2da8130',
-  txcolour: '#120309',
+  txcolour: '#000',
   accent: '#ff9248',
   navcolour: '#528a47',
 }; 
 
 export const darkTheme: Theme = {
-  bgcolour: '#120309',
+  bgcolour: '#091001',
   txcolour: '#fff',
   accent: '#ff9248',
   accent2: '#528a47',
