@@ -27,6 +27,7 @@ interface ILeaf {
   createdOn: string;
   editedOn: string;
   images: boolean;
+  pinned: boolean;
 }
 
 export default function CreateLeaf () {
@@ -55,7 +56,8 @@ export default function CreateLeaf () {
     public: false,
     createdOn: new Date().toLocaleDateString().split('/').join('-'),
     editedOn: '',
-    images: false
+    images: false,
+    pinned: false
   });
 
   const addImage = useCallback(() => {

@@ -14,6 +14,7 @@ interface ILeaf {
     createdOn: string;
     editedOn: string;
     images: boolean;
+    pinned: boolean;
 }
 
 export const createLeaf = async (leaf: ILeaf) => {
