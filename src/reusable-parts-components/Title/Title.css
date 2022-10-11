@@ -3,6 +3,7 @@
 #page-title {
     font-family: 'Amatic SC', cursive;
     font-size: 120pt;
+    margin: 20px;
 }
 
 @media only screen and (max-width: 600px) {
