@@ -10,7 +10,7 @@ import AppState from '../../providers/app-state';
 import Image from '@tiptap/extension-image';
 import { createLeaf } from '../../services/leaf-service';
 import Error from '../../reusable-parts-components/Errors/Error';
-import { cleanPathForDB, messageSetter } from '../../common/helpers';
+import { cleanPathForDB, dateFormatter, messageSetter } from '../../common/helpers';
 // import { useState } from 'react';
 // import { lightTheme } from '../../common/theme-colours';
 
@@ -54,7 +54,7 @@ export default function CreateLeaf () {
     dislikes: 0,
     comments: [],
     public: false,
-    createdOn: new Date().toLocaleDateString().split('/').join('-'),
+    createdOn: dateFormatter(new Date()),
     editedOn: '',
     images: false,
     pinned: false
@@ -106,7 +106,7 @@ export default function CreateLeaf () {
       <Error message={message}></Error>
       <EditorContent editor={editor} onKeyUp={() => {
         const text = editor?.getText().slice(0, 25);
-        setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), preview: text, id: `${newLeaf.author}-${newLeaf.createdOn}-${cleanPathForDB(text)}` });
+        setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), preview: text, id: `${newLeaf.author}-${cleanPathForDB(newLeaf.createdOn)}-${cleanPathForDB(text)}` });
       }} />
     </Box>
   );

@@ -1,7 +1,7 @@
-import { ref, set } from 'firebase/database';
+import { get, ref, set } from 'firebase/database';
 import { db } from '../config/firebase-config';
 
-interface ILeaf {
+export interface ILeaf {
     leaf: string | undefined;
     preview: string;
     title: string;
@@ -24,5 +24,16 @@ export const createLeaf = async (leaf: ILeaf) => {
   } catch (err) {
     console.error(err);
     return 'Something went wrong. Please, try again.';
+  }
+};
+
+
+export const getLeaves = async (username: string): Promise<never[]> => {
+  try {
+    const leaves = await get(ref(db, `leaves/${username}`));
+    return leaves.exists()? Object.values(leaves.val()) : [];
+  } catch (err) {
+    console.error(err);
+    return [];
   }
 };

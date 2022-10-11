@@ -9,5 +9,9 @@ export const messageSetter = (message: string, setter: React.Dispatch<React.SetS
 };
 
 export const cleanPathForDB = (path: string) => {
-  return path.replace(/[/[\]$#.]/g, '');
+  return path.replace(/[/[\]$#. \n]/g, '');
+};
+
+export const dateFormatter = (date: Date) => {
+  return `${date.toDateString()} ${date.toLocaleTimeString()}`;
 };
