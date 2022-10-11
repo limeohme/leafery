@@ -41,7 +41,7 @@ function DropMenu () {
         onClick={handleClick}
         endIcon={<KeyboardDoubleArrowDown />}
         sx={{ color: darkTheme.bgcolour }}
-      ></Button>
+      >Navigate</Button>
       
       <Menu
         
