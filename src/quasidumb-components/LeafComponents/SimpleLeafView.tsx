@@ -29,9 +29,9 @@ export default function SimpleLeafView ({ leaf }: SimpleLeafProps) {
       <Typography variant='body1'>{leaf.preview}...</Typography>
       <Typography variant='caption'>{leaf.createdOn}</Typography>
       <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-        <PushPinIcon sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}></PushPinIcon>
-        <EditIcon sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}/>
-        <DeleteIcon sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}/>
+        <PushPinIcon aria-label='add to pinned leaves' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}></PushPinIcon>
+        <EditIcon aria-label='edit leaf' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}/>
+        <DeleteIcon aria-label='delete-leaves' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}/>
       </Box>
     </Paper>
   );
