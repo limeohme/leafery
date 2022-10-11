@@ -7,19 +7,34 @@ import AppState from '../../providers/app-state';
 import SimpleLeafView from '../../quasidumb-components/LeafComponents/SimpleLeafView';
 import { getLeaves } from '../../services/leaf-service';
 
+interface ILeaf {
+  leaf: string | undefined;
+  preview: string;
+  title: string;
+  author: string;
+  id: string;
+  likes: number;
+  dislikes: number;
+  comments: string[];
+  public: boolean;
+  createdOn: string;
+  editedOn: string;
+  images: boolean;
+  pinned: boolean;
+}
 
 export default function Dashboard () {
 
   const { context: { user, theme } } = useContext(AppState);
-
-  const [leaves, setLeaves] = useState([]);
+  
+  const [leaves, setLeaves] = useState <ILeaf[]>([]);
 
   useEffect(() => {    
     (async () => {
       setLeaves(await getLeaves(user));
     })();
   }, []);
-  console.log(leaves);
+
   return (
     <Box sx={{ width: '80vw', minHeight: 393, boxSizing: 'border-box', my: 4 }}>
       <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={2}>
@@ -38,9 +53,9 @@ export default function Dashboard () {
           boxShadow: `5px 5px ${theme ==='dark'? `${darkTheme.navcolour}80`:'#00000090'}` 
         }}
         component={Link} to={'/create-leaf'}>
-          <Button component={Link} to={'/create-leaf'}>Create new leaf</Button>
+          <Button>Create new leaf</Button>
         </Paper>
-        {leaves.length? leaves.map((leaf) => <SimpleLeafView leaf={leaf}></SimpleLeafView>): <></>}
+        {leaves.length? leaves.map((leaf: ILeaf) => <SimpleLeafView key={leaf.id} leaf={leaf}></SimpleLeafView>): <></>}
       </Masonry>
     </Box>
   );

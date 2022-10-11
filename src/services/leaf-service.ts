@@ -28,7 +28,7 @@ export const createLeaf = async (leaf: ILeaf) => {
 };
 
 
-export const getLeaves = async (username: string): Promise<never[]> => {
+export const getLeaves = async (username: string): Promise<ILeaf[] | []> => {
   try {
     const leaves = await get(ref(db, `leaves/${username}`));
     return leaves.exists()? Object.values(leaves.val()) : [];
