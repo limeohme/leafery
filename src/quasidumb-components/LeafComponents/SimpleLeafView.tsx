@@ -1,17 +1,21 @@
 import { Box, Paper, Typography } from '@mui/material';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import { darkTheme, lightTheme, txtTheme } from '../../common/theme-colours';
 import AppState from '../../providers/app-state';
-import { ILeaf } from '../../services/leaf-service';
+import { deleteLeaf, ILeaf } from '../../services/leaf-service';
 import PushPinIcon from '@mui/icons-material/PushPin';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
+import { useNavigate } from 'react-router-dom';
 
 interface SimpleLeafProps {
     leaf: ILeaf;
+    setTrigger:  React.Dispatch<React.SetStateAction<boolean>>;
+    trigger: boolean;
 }
-export default function SimpleLeafView ({ leaf }: SimpleLeafProps) {
+export default function SimpleLeafView ({ leaf, setTrigger, trigger }: SimpleLeafProps) {
   const { context: { theme } } = useContext(AppState);
+  const navigate = useNavigate();
   return (
     <Paper sx={{ 
       bgcolor: theme !=='dark'? lightTheme.bgcolour:darkTheme.bgcolour, 
@@ -30,8 +34,15 @@ export default function SimpleLeafView ({ leaf }: SimpleLeafProps) {
       <Typography variant='caption'>{leaf.createdOn}</Typography>
       <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
         <PushPinIcon aria-label='add to pinned leaves' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}></PushPinIcon>
-        <EditIcon aria-label='edit leaf' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}/>
-        <DeleteIcon aria-label='delete-leaves' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}/>
+        <EditIcon aria-label='edit leaf' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}
+          onClick={() => navigate(`/detailed-leaf/:${leaf.id}`)}
+        />
+        <DeleteIcon aria-label='delete-leaves' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }} 
+          onClick={() => {
+            deleteLeaf(leaf.author, leaf.id);
+            setTrigger(!trigger);
+
+          }} />
       </Box>
     </Paper>
   );

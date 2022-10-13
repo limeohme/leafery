@@ -52,6 +52,7 @@ function App() {
               <Authenticated>
                 <Routes>
                   <Route path='dashboard' element={<Dashboard/>}/>
+                  <Route path='detailed-leaf/:leafID' element={<CreateLeaf/>}/>
                   <Route path='create-leaf' element={<CreateLeaf/>}/>
                   <Route path='whiteboard' element={<Whiteboard/>}/>
                   <Route path='profile' element={<Profile/>}/>

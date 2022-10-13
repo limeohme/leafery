@@ -28,12 +28,13 @@ export default function Dashboard () {
   const { context: { user, theme } } = useContext(AppState);
   
   const [leaves, setLeaves] = useState <ILeaf[]>([]);
+  const [trigger, setTrigger] = useState(true);
 
   useEffect(() => {    
     (async () => {
       setLeaves(await getLeaves(user));
     })();
-  }, []);
+  }, [trigger]);
 
   return (
     <Box sx={{ width: '80vw', minHeight: 393, boxSizing: 'border-box', my: 4 }}>
@@ -55,7 +56,7 @@ export default function Dashboard () {
         component={Link} to={'/create-leaf'}>
           <Button>Create new leaf</Button>
         </Paper>
-        {leaves.length? leaves.map((leaf: ILeaf) => <SimpleLeafView key={leaf.id} leaf={leaf}></SimpleLeafView>): <></>}
+        {leaves.length? leaves.map((leaf: ILeaf) => <SimpleLeafView setTrigger={setTrigger} trigger={trigger} key={leaf.id} leaf={leaf}></SimpleLeafView>): <></>}
       </Masonry>
     </Box>
   );

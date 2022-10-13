@@ -1,4 +1,5 @@
-import { get, ref, set } from 'firebase/database';
+/* eslint-disable consistent-return */
+import { get, ref, remove, set } from 'firebase/database';
 import { db } from '../config/firebase-config';
 
 export interface ILeaf {
@@ -35,5 +36,25 @@ export const getLeaves = async (username: string): Promise<ILeaf[] | []> => {
   } catch (err) {
     console.error(err);
     return [];
+  }
+};
+
+export const deleteLeaf = async (username: string, leafID: string) => {
+  // eslint-disable-next-line no-restricted-globals
+  if (confirm('Are you sure you want to delete this leaf?')) {
+    try {
+      remove(ref(db, `leaves/${username}/${leafID}`));
+    } catch (err) {
+      console.error(err);
+    }
+  }    
+};
+
+export const getLeafByID = async (username: string, id: string) => {
+  try {
+    const leaf = await (await get(ref(db, `leaves/${username}/${id}`))).val();
+    return leaf;
+  } catch (err) {
+    console.error(err);
   }
 };
