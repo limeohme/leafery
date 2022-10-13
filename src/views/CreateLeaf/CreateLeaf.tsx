@@ -11,6 +11,7 @@ import Image from '@tiptap/extension-image';
 import { createLeaf } from '../../services/leaf-service';
 import Error from '../../reusable-parts-components/Errors/Error';
 import { cleanPathForDB, dateFormatter, messageSetter } from '../../common/helpers';
+
 // import { useState } from 'react';
 // import { lightTheme } from '../../common/theme-colours';
 
@@ -85,14 +86,13 @@ export default function CreateLeaf () {
       messageSetter(err.message, setMessage);
     }
   };
-  console.log(editor.getHTML());
 
   // const [isPublic, setIsPublic] = useState(false);
   return (
     <Box sx={{ my: '5vh', flexWrap: 'wrap' }}>
       <Grid container direction='row' justifyContent={'space-between'}>
-        <Grid item xs={12} sm={12} md={3}><Typography variant='h2' sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>New 🍁</Typography></Grid>
-        <Grid item xs={12} sm={12} md={9} alignItems='center'><EditorMenu editor={editor} addImage={addImage}/></Grid>
+        <Grid item xs={12} sm={12} md={4}><Typography variant='h2' sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>New 🍁</Typography></Grid>
+        <Grid item xs={12} sm={12} md={8} alignItems='center'><EditorMenu editor={editor} addImage={addImage}/></Grid>
       </Grid>
       <br/>
       <TextField placeholder='title here.' variant='standard' 

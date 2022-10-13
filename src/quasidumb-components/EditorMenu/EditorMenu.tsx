@@ -2,6 +2,27 @@ import { Box, Button } from '@mui/material';
 import { useState } from 'react';
 import Foldable from '../../HOC/Foldable';
 import './editor-menu-styles.scss';
+import { 
+  FormatAlignJustify,
+  FormatAlignLeft,
+  FormatAlignRight,
+  FormatAlignCenter,
+  FormatBold,
+  FormatItalic,
+  FormatStrikethrough,
+  HorizontalRule,
+  InsertPageBreak,
+  FormatQuote,
+  Code,
+  FormatListBulleted,
+  FormatListNumbered,
+  Notes,
+  Undo,
+  Redo,
+  AddPhotoAlternate
+} from '@mui/icons-material';
+import FormatClearIcon from '@mui/icons-material/FormatClear';
+
 
 export default function EditorMenu ({ editor, addImage }: any) {
 
@@ -22,159 +43,108 @@ export default function EditorMenu ({ editor, addImage }: any) {
       <Button onClick={() => setTriggers({ ...triggers, style: !triggers.style })}>styles</Button>
       <Foldable open={triggers.style}>
         <>
-          <button
+          <FormatBold sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().toggleBold().run()}
-            disabled={
-              !editor.can()
-                .chain()
-                .focus()
-                .toggleBold()
-                .run()
-            }
             className={editor.isActive('bold') ? 'is-active' : ''}
-          >
-            bold
-          </button>
-          <button
+          />
+          <FormatItalic sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().toggleItalic().run()}
-            disabled={
-              !editor.can()
-                .chain()
-                .focus()
-                .toggleItalic()
-                .run()
-            }
             className={editor.isActive('italic') ? 'is-active' : ''}
-          >
-            italic
-          </button>
-          <button
+          />
+          <FormatStrikethrough sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().toggleStrike().run()}
-            disabled={
-              !editor.can()
-                .chain()
-                .focus()
-                .toggleStrike()
-                .run()
-            }
             className={editor.isActive('strike') ? 'is-active' : ''}
-          >
-            strike
-          </button>
-          <button onClick={() => editor.chain().focus().unsetAllMarks().run()}>
-            clear style
-          </button>
+          />
+          <FormatClearIcon sx={{ m: '5px' }} onClick={() => editor.chain().focus().unsetAllMarks().run()}/>
         </>
 
       </Foldable>
       <Button onClick={() => setTriggers({ ...triggers, structure: !triggers.structure })}>structure</Button>
       <Foldable open={triggers.structure}>
         <>
-          <button
+          <Notes sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().setParagraph().run()}
             className={editor.isActive('paragraph') ? 'is-active' : ''}
-          >
-            paragraph
-          </button>
-          <button
+          />
+          <button data-format-btn
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
             className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
           >
             h1
           </button>
-          <button
+          <button data-format-btn
             onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
             className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
           >
             h2
           </button>
-          <button
+          <button data-format-btn
             onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
             className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
           >
             h3
           </button>
-          <button
+          <button data-format-btn
             onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
             className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
           >
             h4
           </button>
-          <button
+          <button data-format-btn
             onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
             className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}
           >
             h5
           </button>
-          <button
+          <button data-format-btn
             onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
             className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
           >
             h6
           </button>
-          <button
+          <FormatListBulleted sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().toggleBulletList().run()}
             className={editor.isActive('bulletList') ? 'is-active' : ''}
-          >
-            bullet list
-          </button>
-          <button
+          />
+          <FormatListNumbered sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().toggleOrderedList().run()}
             className={editor.isActive('orderedList') ? 'is-active' : ''}
-          >
-            ordered list
-          </button>
-          <button
+          />
+          <Code sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().toggleCodeBlock().run()}
             className={editor.isActive('codeBlock') ? 'is-active' : ''}
-          >
-            code block
-          </button>
-          <button
+          />
+          <FormatQuote sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().toggleBlockquote().run()}
             className={editor.isActive('blockquote') ? 'is-active' : ''}
-          >
-            blockquote
-          </button>
-          <button onClick={() => editor.chain().focus().setHorizontalRule().run()}>
-            horizontal rule
-          </button>
-          <button onClick={() => editor.chain().focus().setHardBreak().run()}>
-            hard break
-          </button>
-          <button onClick={() => editor.chain().focus().clearNodes().run()}>
-            clear
-          </button>
+          />
+          <HorizontalRule sx={{ m: '5px' }} onClick={() => editor.chain().focus().setHorizontalRule().run()}/>
+
+          <InsertPageBreak sx={{ m: '5px' }} onClick={() => editor.chain().focus().setHardBreak().run()}/>
+          <FormatClearIcon sx={{ m: '5px' }} onClick={() => editor.chain().focus().clearNodes().run()}/>
         </>
       </Foldable>
       <Button onClick={() => setTriggers({ ...triggers, alignment: !triggers.alignment })}>align</Button>
       <Foldable open={triggers.alignment}>
         <>
-          <button
+          <FormatAlignLeft sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().setTextAlign('left').run()}
             className={editor.isActive({ textAlign: 'left' }) ? 'is-active' : ''}
-          >
-          left
-          </button>
-          <button
+          />
+          
+          <FormatAlignCenter sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().setTextAlign('center').run()}
             className={editor.isActive({ textAlign: 'center' }) ? 'is-active' : ''}
-          >
-          center
-          </button>
-          <button
+          />
+          <FormatAlignRight sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().setTextAlign('right').run()}
             className={editor.isActive({ textAlign: 'right' }) ? 'is-active' : ''}
-          >
-          right
-          </button>
-          <button
+          />
+          <FormatAlignJustify sx={{ m: '5px' }}
             onClick={() => editor.chain().focus().setTextAlign('justify').run()}
             className={editor.isActive({ textAlign: 'justify' }) ? 'is-active' : ''}
-          >
-          justify
-          </button>
-          <button onClick={() => editor.chain().focus().unsetTextAlign().run()}>clear align</button>
+          />
+          <FormatClearIcon sx={{ m: '5px' }} onClick={() => editor.chain().focus().unsetTextAlign().run()}/>
         </>
       </Foldable>
       <div>
@@ -188,7 +158,7 @@ export default function EditorMenu ({ editor, addImage }: any) {
               .run()
           }
         >
-            undo
+          <Undo/>
         </Button>
         <Button
           onClick={() => editor.chain().focus().redo().run()}
@@ -200,11 +170,11 @@ export default function EditorMenu ({ editor, addImage }: any) {
               .run()
           }
         >
-            redo
+          <Redo/>
         </Button>
 
       </div>
-      <Button onClick={addImage}>set image</Button>
+      <AddPhotoAlternate sx={{ m: '5px', ml: '20px' }} onClick={addImage}/>
     </Box>
   );
 };

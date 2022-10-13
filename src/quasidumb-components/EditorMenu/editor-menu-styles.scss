@@ -52,7 +52,7 @@
     pre {
       background: #0D0D0D;
       color: #FFF;
-      font-family: 'JetBrainsMono', monospace;
+      font-family: 'Noto Sans KR', monospace;
       padding: 0.75rem 1rem;
       border-radius: 0.5rem;
   
@@ -83,12 +83,16 @@
     min-height: 60vh;
   }
 
-button {
-    color: #0D0D0D;
-    padding: 10px;
+button[data-format-btn=true] {
+    color: #000000;
+    padding: 1px;
+    text-align: center ;
     margin: 5px;
-    background-color: #d4f1af;
-    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    background-color: transparent;
+    width: 2em;
+    border-radius: 0px;
 }
 
 .is-active {
