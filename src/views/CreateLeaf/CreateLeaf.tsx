@@ -1,10 +1,10 @@
-import { Box, Button, Grid, TextField, Typography } from '@mui/material';
+import { Box, Button, Checkbox, FormControlLabel, Grid, TextField, Typography } from '@mui/material';
 import { useEditor, EditorContent, generateJSON } from '@tiptap/react';
 import TextAlign from '@tiptap/extension-text-align';
 import StarterKit from '@tiptap/starter-kit';
 import './create-leaf-styles.scss';
 import EditorMenu from '../../quasidumb-components/EditorMenu/EditorMenu';
-import { txtTheme } from '../../common/theme-colours';
+import { lightTheme, txtTheme } from '../../common/theme-colours';
 import { useCallback, useContext, useEffect, useState } from 'react';
 import AppState from '../../providers/app-state';
 import Image from '@tiptap/extension-image';
@@ -12,9 +12,6 @@ import { createLeaf, getLeafByID } from '../../services/leaf-service';
 import Error from '../../reusable-parts-components/Errors/Error';
 import { cleanPathForDB, dateFormatter, messageSetter } from '../../common/helpers';
 import { useParams } from 'react-router-dom';
-
-// import { useState } from 'react';
-// import { lightTheme } from '../../common/theme-colours';
 
 interface ILeaf {
   leaf: string | undefined;
@@ -32,10 +29,12 @@ interface ILeaf {
   pinned: boolean;
 }
 
-export default function CreateLeaf ({ editable=true }) {
-  const { context: { user } } = useContext(AppState);
+export default function CreateLeaf () {
+  const { context: { user, theme } } = useContext(AppState);
   const { leafID } = useParams();
   const [title, setTitle] = useState('');
+  const [edit, setEdit] = useState(false);
+  const editable = leafID? edit: true;
   const [currentLeaf, setLeaf] = useState<ILeaf>({
     leaf: '',
     preview: '',
@@ -47,7 +46,7 @@ export default function CreateLeaf ({ editable=true }) {
     comments: [],
     public: false,
     createdOn: dateFormatter(new Date()),
-    editedOn: leafID? dateFormatter(new Date()): '',
+    editedOn: '',
     images: false,
     pinned: false
   });
@@ -74,7 +73,7 @@ export default function CreateLeaf ({ editable=true }) {
     dislikes: 0,
     comments: [],
     public: false,
-    createdOn: currentLeaf.createdOn || dateFormatter(new Date()),
+    createdOn: dateFormatter(new Date()),
     editedOn: leafID? dateFormatter(new Date()): '',
     images: false,
     pinned: false
@@ -91,18 +90,26 @@ export default function CreateLeaf ({ editable=true }) {
           TextAlign.configure({
             types: ['heading', 'paragraph', 'bulletList', 'orderedList'],
           }),]);
-        editor?.commands.setContent(json, true);
+        editor?.commands.setContent(json);
       }
     })();
 
   }, [editor]);
-  console.log(editor?.getHTML());        
+  
+  useEffect(() => {
+    editor?.setEditable(editable);
+  }, [editable, editor]);
+
   const addImage = useCallback(() => {
     const url = window.prompt('Please enter the image\'s URL 😊');
 
     if (url) {
       editor?.chain().focus().setImage({ src: url }).run();
-      setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), images: true });
+      if (!leafID) {
+        setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), images: true });
+      } else {
+        setLeaf({ ...currentLeaf, leaf: editor?.getHTML(), images: true });
+      }
     }
   }, [editor]);
 
@@ -122,29 +129,41 @@ export default function CreateLeaf ({ editable=true }) {
       messageSetter(err.message, setMessage);
     }
   };
-    
   // const [isPublic, setIsPublic] = useState(false);
   return (
-    <Box sx={{ my: '5vh', flexWrap: 'wrap' }}>
+    <Box sx={{ my: '5vh', flexWrap: 'wrap', fontFamily: txtTheme.font }}>
       <Grid container direction='row' justifyContent={'space-between'}>
         <Grid item xs={12} sm={12} md={4}><Typography variant='h2' sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>New 🍁</Typography></Grid>
         <Grid item xs={12} sm={12} md={8} alignItems='center'><EditorMenu editor={editor} addImage={addImage}/></Grid>
       </Grid>
       <br/>
-      <TextField placeholder='title here.' variant='standard' defaultValue={title}
-        sx={{ mx:2, bgcolor: '#d4f1af', borderRadius: 1, pl: 1, alignSelf: 'start' }}
-        onChange={(e) => setNewLeaf({ ...newLeaf, title: e.target.value })}
+      <TextField placeholder='title here.' variant='standard' value={leafID? currentLeaf.title : newLeaf.title}
+        disabled={leafID? !edit: false}
+        sx={{ mx:2, bgcolor: theme === 'dark'? '#FFF' : 'transparent', borderRadius: 1, pl: 1, alignSelf: 'start' }}
+        onChange={(e) => {
+          if (!leafID) {
+            setNewLeaf({ ...newLeaf, title: e.target.value });
+          } else {
+            setLeaf({ ...currentLeaf, title: e.target.value });
+          }
+        }}
       ></TextField>
       {/* <FormControlLabel 
         control={<Checkbox sx={{ color: lightTheme.accent }} checked={isPublic} onChange={() => setIsPublic(!isPublic)}/>}
         label="Post to public leafery" /> */}
-      <Button onClick={() => handleLeafSave(newLeaf)}>Save</Button>
+      {leafID? <FormControlLabel
+        control={<Checkbox aria-label='checkbox edit' sx={{ color: lightTheme.accent }} value={edit} onChange={(event) => setEdit(event.target.checked)}/>}
+        label="Edit?" />: null}
+      <Button onClick={() => leafID? handleLeafSave(currentLeaf) : handleLeafSave(newLeaf)}>Save</Button>
       <Error message={message}></Error>
       <EditorContent editor={editor} onKeyUp={() => {
         const text = editor?.getText().slice(0, 25);
-        setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), preview: text, id: `${newLeaf.author}-${cleanPathForDB(newLeaf.createdOn)}-${cleanPathForDB(text)}` });
+        if (!leafID) {
+          setNewLeaf({ ...newLeaf, leaf: editor?.getHTML(), preview: text, id: `${newLeaf.author}-${cleanPathForDB(newLeaf.createdOn)}-${cleanPathForDB(text)}` });
+        } else {
+          setLeaf({ ...currentLeaf, leaf: editor.getHTML(), preview: text, editedOn: dateFormatter(new Date()) });
+        }
       }} />
-      {}
     </Box>
   );
 }

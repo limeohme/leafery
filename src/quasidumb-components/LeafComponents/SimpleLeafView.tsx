@@ -31,7 +31,8 @@ export default function SimpleLeafView ({ leaf, setTrigger, trigger }: SimpleLea
     }}>
       {leaf.title?<Typography variant='h6'>{leaf.title}</Typography> : null}
       <Typography variant='body1'>{leaf.preview}...</Typography>
-      <Typography variant='caption'>{leaf.createdOn}</Typography>
+      {leaf.editedOn? <Typography variant='caption'>Last edit: {leaf.editedOn}</Typography>: null}
+      <Typography variant='caption' sx={{ opacity: leaf.editedOn? '80%': '100%' }}>Date created: {leaf.createdOn}</Typography>
       <Box sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
         <PushPinIcon aria-label='add to pinned leaves' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}></PushPinIcon>
         <EditIcon aria-label='edit leaf' sx={{ cursor: 'pointer', '&:hover': { color: lightTheme.accent } }}
