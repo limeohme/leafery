@@ -1,5 +1,7 @@
 # Leafery - The Notepad App
 
+![image](https://github.com/limeohme/leafery/blob/main/public/android-chrome-192x192.png?raw=true)
+
 ## Description
 While we were doing our projects at Telerik Academy, I found it helpful to both take notes and draw schemes of the apps while I planned different features: I had to switch between different tools to achieve a complete plan for the project and that gave me the idea for an app that integrates all of the functionalities I needed. The basic features that Leafery includes (will include 😁) are a text editor, Excalidraw plugin, system for categorization of the Leaves (Notes/Posts/Whatever-You-Wanna-Call-Them).
 I am also planning a part of it that will focus on collaboration but this idea will wait until the app has a stable basis. 
