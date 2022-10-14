@@ -1,5 +1,5 @@
 import { Box, Button } from '@mui/material';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Foldable from '../../HOC/Foldable';
 import './editor-menu-styles.scss';
 import { 
@@ -22,10 +22,11 @@ import {
   AddPhotoAlternate
 } from '@mui/icons-material';
 import FormatClearIcon from '@mui/icons-material/FormatClear';
+import AppState from '../../providers/app-state';
 
 
 export default function EditorMenu ({ editor, addImage }: any) {
-
+  const { context: { theme } } = useContext(AppState);
   const [triggers, setTriggers] = useState({
     style: false,
     alignment: false,
@@ -66,37 +67,37 @@ export default function EditorMenu ({ editor, addImage }: any) {
             onClick={() => editor.chain().focus().setParagraph().run()}
             className={editor.isActive('paragraph') ? 'is-active' : ''}
           />
-          <button data-format-btn
+          <button data-format-btn style={{ color: theme === 'dark'? '#fff': '#000' }}
             onClick={() => editor.chain().focus().toggleHeading({ level: 1 }).run()}
             className={editor.isActive('heading', { level: 1 }) ? 'is-active' : ''}
           >
             h1
           </button>
-          <button data-format-btn
+          <button data-format-btn style={{ color: theme === 'dark'? '#fff': '#000' }}
             onClick={() => editor.chain().focus().toggleHeading({ level: 2 }).run()}
             className={editor.isActive('heading', { level: 2 }) ? 'is-active' : ''}
           >
             h2
           </button>
-          <button data-format-btn
+          <button data-format-btn style={{ color: theme === 'dark'? '#fff': '#000' }}
             onClick={() => editor.chain().focus().toggleHeading({ level: 3 }).run()}
             className={editor.isActive('heading', { level: 3 }) ? 'is-active' : ''}
           >
             h3
           </button>
-          <button data-format-btn
+          <button data-format-btn style={{ color: theme === 'dark'? '#fff': '#000' }}
             onClick={() => editor.chain().focus().toggleHeading({ level: 4 }).run()}
             className={editor.isActive('heading', { level: 4 }) ? 'is-active' : ''}
           >
             h4
           </button>
-          <button data-format-btn
+          <button data-format-btn style={{ color: theme === 'dark'? '#fff': '#000' }}
             onClick={() => editor.chain().focus().toggleHeading({ level: 5 }).run()}
             className={editor.isActive('heading', { level: 5 }) ? 'is-active' : ''}
           >
             h5
           </button>
-          <button data-format-btn
+          <button data-format-btn style={{ color: theme === 'dark'? '#fff': '#000' }}
             onClick={() => editor.chain().focus().toggleHeading({ level: 6 }).run()}
             className={editor.isActive('heading', { level: 6 }) ? 'is-active' : ''}
           >

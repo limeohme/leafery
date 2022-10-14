@@ -29,7 +29,7 @@ export default function SimpleLeafView ({ leaf, setTrigger, trigger }: SimpleLea
       border: `2px solid ${theme ==='dark'? darkTheme.navcolour:darkTheme.bgcolour}`,
       boxShadow: `5px 5px ${theme ==='dark'? `${darkTheme.navcolour}80`:'#00000090'}`
     }}>
-      {leaf.title?<Typography variant='h6'>{leaf.title}</Typography> : null}
+      {leaf.title?<Typography variant='h6'>{leaf.title.slice(0, 15)}...</Typography> : null}
       <Typography variant='body1'>{leaf.preview}...</Typography>
       {leaf.editedOn? <Typography variant='caption'>Last edit: {leaf.editedOn}</Typography>: null}
       <Typography variant='caption' sx={{ opacity: leaf.editedOn? '80%': '100%' }}>Date created: {leaf.createdOn}</Typography>

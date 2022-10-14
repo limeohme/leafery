@@ -132,10 +132,13 @@ export default function CreateLeaf () {
   // const [isPublic, setIsPublic] = useState(false);
   return (
     <Box sx={{ my: '5vh', flexWrap: 'wrap', fontFamily: txtTheme.font }}>
-      <Grid container direction='row' justifyContent={'space-between'}>
-        <Grid item xs={12} sm={12} md={4}><Typography variant='h2' sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>New 🍁</Typography></Grid>
-        <Grid item xs={12} sm={12} md={8} alignItems='center'><EditorMenu editor={editor} addImage={addImage}/></Grid>
-      </Grid>
+      {leafID && !edit? <Typography variant='h2' 
+        sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>{currentLeaf.title.slice(0, 6)}...</Typography> :
+        <Grid container direction='row' justifyContent={'space-between'}>
+          <Grid item xs={12} sm={12} md={4}><Typography variant='h2' 
+            sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>{leafID? `${currentLeaf.title.slice(0, 6)}...` : 'New 🍁'}</Typography></Grid>
+          <Grid item xs={12} sm={12} md={8} alignItems='center'><EditorMenu editor={editor} addImage={addImage}/></Grid>
+        </Grid>}
       <br/>
       <TextField placeholder='title here.' variant='standard' value={leafID? currentLeaf.title : newLeaf.title}
         disabled={leafID? !edit: false}
@@ -144,7 +147,7 @@ export default function CreateLeaf () {
           if (!leafID) {
             setNewLeaf({ ...newLeaf, title: e.target.value });
           } else {
-            setLeaf({ ...currentLeaf, title: e.target.value });
+            setLeaf({ ...currentLeaf, title: e.target.value, editedOn: dateFormatter(new Date()) });
           }
         }}
       ></TextField>
@@ -154,7 +157,7 @@ export default function CreateLeaf () {
       {leafID? <FormControlLabel
         control={<Checkbox aria-label='checkbox edit' sx={{ color: lightTheme.accent }} value={edit} onChange={(event) => setEdit(event.target.checked)}/>}
         label="Edit?" />: null}
-      <Button onClick={() => leafID? handleLeafSave(currentLeaf) : handleLeafSave(newLeaf)}>Save</Button>
+      {leafID && !edit? null: <Button onClick={() => leafID? handleLeafSave(currentLeaf) : handleLeafSave(newLeaf)}>Save</Button>}
       <Error message={message}></Error>
       <EditorContent editor={editor} onKeyUp={() => {
         const text = editor?.getText().slice(0, 25);
