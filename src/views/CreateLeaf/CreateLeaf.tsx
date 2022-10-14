@@ -133,10 +133,10 @@ export default function CreateLeaf () {
   return (
     <Box sx={{ my: '5vh', flexWrap: 'wrap', fontFamily: txtTheme.font }}>
       {leafID && !edit? <Typography variant='h2' 
-        sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>{currentLeaf.title.slice(0, 6)}...</Typography> :
+        sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>{currentLeaf.title}</Typography> :
         <Grid container direction='row' justifyContent={'space-between'}>
           <Grid item xs={12} sm={12} md={4}><Typography variant='h2' 
-            sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>{leafID? `${currentLeaf.title.slice(0, 6)}...` : 'New 🍁'}</Typography></Grid>
+            sx={{ fontFamily: txtTheme.titleFont, ml: 3 }}>{leafID? `${currentLeaf.title.slice(0, 10)}...` : 'New 🍁'}</Typography></Grid>
           <Grid item xs={12} sm={12} md={8} alignItems='center'><EditorMenu editor={editor} addImage={addImage}/></Grid>
         </Grid>}
       <br/>

@@ -58,3 +58,13 @@ export const getLeafByID = async (username: string, id: string) => {
     console.error(err);
   }
 };
+
+export const updateLeafProp = async (username: string, id: string, prop: string, value: any) => {
+  try {
+    await set(ref(db, `leaves/${username}/${id}/${prop}`), value);
+    return 'Success!';
+  } catch(err) {
+    console.error(err);
+    return 'Something went wrong!';
+  }
+};
