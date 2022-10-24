@@ -16,9 +16,9 @@ export default function App() {
   const [openModes, setOpenModes] = useState(false);
 
   return (
-    <div className="whiteboard">
-      <div className="button-wrapper">
-        <Box>
+    <Box className="whiteboard" sx={{ display: 'flex', flexDirection: 'column' , alignItems: 'center', width: '80vw', minWidth: '300px' }}>
+      <Box className="button-wrapper">
+        <Box sx={{ maxWidth: '80vw' }}>
           <Button
             className="reset-scene"
             onClick={() => {
@@ -52,7 +52,7 @@ export default function App() {
               label="Grid?" />
           </Foldable>
         </Box>
-      </div>
+      </Box>
       <div className="excalidraw-wrapper">
         <Excalidraw
           ref={excalidrawRef}
@@ -68,6 +68,6 @@ export default function App() {
           gridModeEnabled={gridModeEnabled}
         />
       </div>
-    </div>
+    </Box>
   );
 }
