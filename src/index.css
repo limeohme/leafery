@@ -9,3 +9,14 @@ body {
 code {
   font-family: 'Noto Sans KR', sans-serif;
 }
+
+::-webkit-scrollbar {
+  /* display: none; */
+  background-color: #b2da8130;
+  width: 2px;
+} 
+
+::-webkit-scrollbar-thumb {
+  /* background: #909c7f; */
+  background: #091001;
+}
