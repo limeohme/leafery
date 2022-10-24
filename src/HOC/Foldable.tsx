@@ -7,11 +7,13 @@ interface FoldableProps {
 
 export default function Foldable ({ children, open }: FoldableProps) {
   if (!open) {
-    return null;
+    return (
+      <Box sx={{ height: '42px' }}></Box>
+    );
   }
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', }}>
+    <Box sx={{ display: 'flex', flexDirection: 'row', flexWrap: 'wrap', height: '42px' }}>
       {children}
     </Box>
   );
