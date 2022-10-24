@@ -3,7 +3,7 @@ import { Excalidraw } from '@excalidraw/excalidraw';
 // import InitialData from './initialData';
 
 import './styles.scss';
-import { Button, Checkbox, FormControlLabel } from '@mui/material';
+import { Box, Button, Checkbox, FormControlLabel } from '@mui/material';
 import { lightTheme } from '../../common/theme-colours';
 import Foldable from '../../HOC/Foldable';
 
@@ -18,36 +18,40 @@ export default function App() {
   return (
     <div className="whiteboard">
       <div className="button-wrapper">
-        <Button
-          className="reset-scene"
-          onClick={() => {
-            excalidrawRef.current.resetScene();
-          }}
-        >
+        <Box>
+          <Button
+            className="reset-scene"
+            onClick={() => {
+              excalidrawRef.current.resetScene();
+            }}
+          >
           Reset Scene
-        </Button>
-        <Button
-          className="reset-scene"
-          onClick={() => {
-            setOpenModes(!openModes);
-          }}
-        >
+          </Button>
+          <Button
+            className="reset-scene"
+            onClick={() => {
+              setOpenModes(!openModes);
+            }}
+          >
           View Modes
-        </Button>
-        <Foldable open={openModes}>
-          <FormControlLabel 
-            control={<Checkbox aria-label='checkbox edit' sx={{ color: lightTheme.accent }} checked={viewModeEnabled}
-              onChange={() => setViewModeEnabled(!viewModeEnabled)}/>}
-            label="View?" />
-          <FormControlLabel 
-            control={<Checkbox aria-label='checkbox edit' sx={{ color: lightTheme.accent }} checked={zenModeEnabled}
-              onChange={() => setZenModeEnabled(!zenModeEnabled)}/>}
-            label="Zen?" />
-          <FormControlLabel 
-            control={<Checkbox aria-label='checkbox edit' sx={{ color: lightTheme.accent }} checked={gridModeEnabled}
-              onChange={() => setGridModeEnabled(!gridModeEnabled)}/>}
-            label="Grid?" />
-        </Foldable>
+          </Button>
+        </Box>
+        <Box sx={{ display: 'flex' , flexDirection: 'row' }}>
+          <Foldable open={openModes}>
+            <FormControlLabel 
+              control={<Checkbox aria-label='checkbox edit' sx={{ color: lightTheme.accent }} checked={viewModeEnabled}
+                onChange={() => setViewModeEnabled(!viewModeEnabled)}/>}
+              label="View?" />
+            <FormControlLabel 
+              control={<Checkbox aria-label='checkbox edit' sx={{ color: lightTheme.accent }} checked={zenModeEnabled}
+                onChange={() => setZenModeEnabled(!zenModeEnabled)}/>}
+              label="Zen?" />
+            <FormControlLabel 
+              control={<Checkbox aria-label='checkbox edit' sx={{ color: lightTheme.accent }} checked={gridModeEnabled}
+                onChange={() => setGridModeEnabled(!gridModeEnabled)}/>}
+              label="Grid?" />
+          </Foldable>
+        </Box>
       </div>
       <div className="excalidraw-wrapper">
         <Excalidraw
